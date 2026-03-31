@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Content Day — Hilltop Creative Hub</title>
+<link href="https://fonts.cdnfonts.com/css/fabrica-2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Barlow:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ── FONT NOTES FOR DEV ────────────────────────────────────────
+   Logo 'h' = Fabrica | 'illtop' = Foda Display (Barlow Condensed stand-in)
+   Body = Fabrica | UI Labels = Cocomat Pro (Barlow Condensed stand-in)
+   Replace font-family references once premium fonts are hosted.
+───────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --deep:       #162144;
+  --deep-alt:   #111c3a;
+  --mid:        #293c55;
+  --lime:       #c1ff72;
+  --lime-dim:   #a8e85e;
+  --white:      #ffffff;
+  --off:        #f0f4f8;
+  --slate:      #7d8fa3;
+  --slate-lt:   #a4b4c4;
+  --cyan:       #67e8f9;
+  --cyan-dim:   rgba(103,232,249,0.12);
+  --border-l:   rgba(193,255,114,0.14);
+  --border-m:   rgba(41,60,85,0.8);
+  --font-body:  'Fabrica', 'Barlow', sans-serif;
+  --font-ui:    'Cocomat Pro', 'Barlow Condensed', sans-serif;
+  --font-disp:  'Foda Display', 'Barlow Condensed', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--deep);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* grain overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+}
+
+/* ── LOGO ── */
+.logo { display: flex; align-items: baseline; line-height: 1; text-decoration: none; }
+.logo-h  { font-family: var(--font-body); font-size: 1.3rem; font-weight: 400; color: var(--lime); letter-spacing: -0.01em; }
+.logo-illtop { font-family: var(--font-disp); font-size: 1.3rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
+.logo-ch { font-family: var(--font-ui); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-left: 0.5rem; align-self: flex-end; padding-bottom: 0.18rem; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  padding: 1.2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(22,33,68,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(193,255,114,0.07);
+}
+.nav-cta {
+  background: var(--lime); color: var(--deep);
+  font-family: var(--font-ui); font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.6rem 1.4rem; text-decoration: none; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--white); }
+
+/* ════════════════════════════════════════════
+   HERO — cinematic split with big type
+═══════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 3rem 5rem;
+  position: relative; overflow: hidden;
+}
+
+/* Large background "microphone" / abstract shape */
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 40%, rgba(41,60,85,0.7) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 20% 70%, rgba(193,255,114,0.04) 0%, transparent 60%);
+}
+
+/* Animated scan line */
+.hero-scan {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(193,255,114,0.25) 40%, rgba(193,255,114,0.5) 50%, rgba(193,255,114,0.25) 60%, transparent 100%);
+  animation: scan 6s ease-in-out infinite;
+  top: 0;
+}
+@keyframes scan { 0%,100% { top: 15%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 50% { top: 85%; } }
+
+/* Large decorative number */
+.hero-deco {
+  position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-disp); font-size: clamp(12rem, 22vw, 22rem);
+  font-weight: 700; line-height: 1; letter-spacing: -0.05em;
+  color: rgba(41,60,85,0.35); user-select: none; pointer-events: none;
+  white-space: nowrap;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 1.8rem;
+  animation: fadeUp 0.7s ease both;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan); animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+
+.hero h1 {
+  font-family: var(--font-body);
+  font-size: clamp(3rem, 6.5vw, 7rem); font-weight: 400;
+  line-height: 0.95; letter-spacing: -0.035em;
+  max-width: 820px; position: relative; z-index: 1;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero h1 em { font-style: italic; color: var(--slate-lt); font-weight: 300; }
+.hero h1 .hl { color: var(--lime); }
+
+.hero-sub-row {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-top: 2.5rem; gap: 2rem; flex-wrap: wrap;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+.hero-sub {
+  font-size: 1rem; line-height: 1.78; color: var(--slate-lt);
+  max-width: 460px;
+}
+.hero-sub strong { color: var(--white); font-weight: 500; }
+
+.hero-price-snap {
+  text-align: right; flex-shrink: 0;
+}
+.snap-label { font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 0.3rem; }
+.snap-num { font-family: var(--font-body); font-size: 3.2rem; font-weight: 400; letter-spacing: -0.04em; line-height: 1; color: var(--white); }
+.snap-num sup { font-size: 1.2rem; vertical-align: top; margin-top: 0.4rem; color: var(--lime); }
+.snap-period { font-family: var(--font-ui); font-size: 0.72rem; color: var(--slate-lt); letter-spacing: 0.04em; margin-top: 0.3rem; }
+
+.hero-actions {
+  display: flex; align-items: center; gap: 1.5rem; margin-top: 2.5rem;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.7s 0.28s ease both;
+}
+.btn-primary {
+  background: var(--lime); color: var(--deep);
+  font-family: var(--font-ui); font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 1rem 2.4rem; text-decoration: none; transition: all 0.2s; display: inline-block;
+}
+.btn-primary:hover { background: var(--white); transform: translateY(-2px); }
+.btn-ghost {
+  font-family: var(--font-ui); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--slate-lt); text-decoration: none;
+  display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--lime); }
+
+/* ── SCROLL TICKER ── */
+.ticker-wrap {
+  background: var(--lime); overflow: hidden; padding: 0.65rem 0;
+  position: relative; white-space: nowrap;
+}
+.ticker-track {
+  display: inline-flex; gap: 0;
+  animation: ticker 28s linear infinite;
+}
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 1rem;
+  font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--deep); padding: 0 2.5rem;
+}
+.ticker-sep { color: rgba(22,33,68,0.35); font-size: 1rem; }
+
+/* ════════════════════════════════════════════
+   THE PROBLEM — dark, honest, punchy
+═══════════════════════════════════════════════ */
+.problem-section {
+  padding: 8rem 3rem; background: var(--deep-alt);
+  position: relative; overflow: hidden;
+}
+.problem-section::before {
+  content: '"'; position: absolute; top: -2rem; left: 2rem;
+  font-family: var(--font-disp); font-size: clamp(14rem, 25vw, 26rem);
+  line-height: 1; color: rgba(41,60,85,0.2);
+  pointer-events: none; user-select: none;
+}
+.problem-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-ui); font-size: 0.67rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--lime);
+  margin-bottom: 2rem;
+}
+.eyebrow::before { content: ''; display: block; width: 18px; height: 2px; background: var(--lime); flex-shrink: 0; }
+
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.problem-headline {
+  font-family: var(--font-body);
+  font-size: clamp(2rem, 3.5vw, 3.4rem); font-weight: 400;
+  line-height: 1.08; letter-spacing: -0.025em;
+}
+.problem-headline em { font-style: italic; color: var(--slate-lt); }
+.problem-headline .hl { color: var(--lime); }
+
+.problem-right { padding-top: 0.5rem; }
+.problem-quote {
+  font-size: 1.15rem; line-height: 1.75; color: rgba(255,255,255,0.7);
+  font-style: italic; margin-bottom: 2rem; border-left: 2px solid rgba(193,255,114,0.3); padding-left: 1.4rem;
+}
+.problem-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.problem-list li {
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  font-size: 0.9rem; color: var(--slate-lt); line-height: 1.7;
+}
+.prob-x {
+  width: 18px; height: 18px; border: 1px solid rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px; font-size: 0.65rem; color: rgba(255,255,255,0.3);
+  font-family: sans-serif;
+}
+
+/* ════════════════════════════════════════════
+   THE SOLUTION — light section contrast
+═══════════════════════════════════════════════ */
+.solution-section {
+  padding: 8rem 3rem; background: var(--off); color: var(--deep);
+  position: relative; overflow: hidden;
+}
+.solution-section::after {
+  content: ''; position: absolute; bottom: 0; right: 0;
+  width: 45%; height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(193,255,114,0.15) 100%);
+  pointer-events: none;
+}
+.solution-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+.eyebrow-dark {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-ui); font-size: 0.67rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--deep);
+  opacity: 0.5; margin-bottom: 1.5rem;
+}
+.eyebrow-dark::before { content: ''; display: block; width: 18px; height: 2px; background: var(--deep); flex-shrink: 0; }
+.solution-title {
+  font-family: var(--font-body);
+  font-size: clamp(2.2rem, 4vw, 4.2rem); font-weight: 400;
+  line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+  color: var(--deep);
+}
+.solution-title .hl-dark { color: #162144; font-style: italic; }
+
+.solution-cols { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: center; margin-top: 4rem; }
+.solution-body { font-size: 1rem; line-height: 1.85; color: rgba(22,33,68,0.72); }
+.solution-body strong { color: var(--deep); font-weight: 500; }
+.solution-body p + p { margin-top: 1.2rem; }
+
+/* Animated film strip mock */
+.filmstrip {
+  position: relative; height: 340px;
+}
+.film-bg {
+  position: absolute; inset: 0;
+  background: var(--deep);
+  border: 1px solid rgba(22,33,68,0.1);
+  overflow: hidden;
+}
+.film-row {
+  display: flex; gap: 3px; padding: 3px;
+  position: absolute; left: 0; right: 0;
+  animation: filmSlide 18s linear infinite;
+}
+.film-row-2 { top: 50%; animation-delay: -9s; animation-direction: reverse; }
+@keyframes filmSlide { from { transform: translateX(0); } to { transform: translateX(-33.33%); } }
+.film-frame {
+  flex-shrink: 0; width: 110px; height: 160px;
+  background: var(--mid); border: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.film-frame::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(193,255,114,0.04) 0%, transparent 50%);
+}
+.frame-icon { color: rgba(193,255,114,0.2); }
+.film-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 0.4rem 0.5rem;
+  background: rgba(22,33,68,0.8);
+  font-family: var(--font-ui); font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime);
+}
+.film-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, var(--off) 0%, transparent 15%, transparent 85%, var(--off) 100%);
+  pointer-events: none; z-index: 2;
+}
+.film-counter {
+  position: absolute; bottom: 1.2rem; right: 1.5rem; z-index: 3;
+  background: var(--lime); color: var(--deep);
+  font-family: var(--font-ui); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 0.35rem 0.9rem;
+}
+
+/* ════════════════════════════════════════════
+   WHAT YOU GET — deliverables grid
+═══════════════════════════════════════════════ */
+.delivers-section { padding: 8rem 3rem; background: var(--mid); }
+.delivers-inner { max-width: 1080px; margin: 0 auto; }
+.delivers-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
+.delivers-title {
+  font-family: var(--font-body); font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 400;
+  line-height: 1.05; letter-spacing: -0.025em;
+}
+.delivers-title .hl { color: var(--lime); }
+.delivers-desc { font-size: 0.95rem; line-height: 1.82; color: var(--slate-lt); }
+.delivers-desc strong { color: var(--white); font-weight: 500; }
+
+.delivers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.05); }
+.d-card {
+  background: var(--mid); padding: 2.2rem 1.8rem;
+  border-top: 2px solid transparent; transition: all 0.3s; position: relative; overflow: hidden;
+}
+.d-card::after {
+  content: ''; position: absolute; bottom: 0; right: 0;
+  width: 60%; height: 60%;
+  background: radial-gradient(ellipse at 80% 80%, rgba(193,255,114,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.d-card:hover { background: rgba(22,33,68,0.5); border-top-color: var(--lime); }
+.d-num { font-family: var(--font-disp); font-size: 3.5rem; font-weight: 700; line-height: 1; color: rgba(193,255,114,0.1); margin-bottom: 0.6rem; letter-spacing: -0.05em; }
+.d-title { font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; color: var(--white); margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+.d-body { font-size: 0.82rem; color: var(--slate-lt); line-height: 1.72; }
+.d-pill { display: inline-block; background: rgba(193,255,114,0.1); color: var(--lime); font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.65rem; margin-top: 0.9rem; }
+
+/* ════════════════════════════════════════════
+   WHO THIS IS FOR — persona cards
+═══════════════════════════════════════════════ */
+.who-section { padding: 8rem 3rem; background: var(--deep); }
+.who-inner { max-width: 1080px; margin: 0 auto; }
+.who-title { font-family: var(--font-body); font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 1rem; }
+.who-title .hl { color: var(--lime); }
+.who-sub { font-size: 0.96rem; color: var(--slate-lt); line-height: 1.78; max-width: 520px; margin-bottom: 3.5rem; }
+
+.who-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: rgba(255,255,255,0.05); }
+.who-card { background: var(--deep); padding: 2rem 1.6rem; transition: all 0.3s; border-top: 2px solid transparent; }
+.who-card:hover { background: var(--mid); border-top-color: rgba(193,255,114,0.4); }
+.who-tag { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lime); margin-bottom: 0.7rem; }
+.who-name { font-family: var(--font-body); font-size: 1rem; font-weight: 400; color: var(--white); margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.who-desc { font-size: 0.81rem; color: var(--slate-lt); line-height: 1.72; }
+.who-example { font-size: 0.73rem; color: var(--slate); margin-top: 0.7rem; font-style: italic; }
+
+/* ════════════════════════════════════════════
+   PROCESS — how the day works
+═══════════════════════════════════════════════ */
+.process-section { padding: 8rem 3rem; background: var(--deep-alt); overflow: hidden; position: relative; }
+.process-section::before {
+  content: 'DAY'; position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-disp); font-size: clamp(10rem, 20vw, 22rem);
+  font-weight: 700; letter-spacing: -0.05em; line-height: 1;
+  color: rgba(41,60,85,0.25); pointer-events: none; user-select: none;
+}
+.process-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+.process-title { font-family: var(--font-body); font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 3.5rem; }
+.process-title .hl { color: var(--lime); }
+
+.process-steps { display: grid; grid-template-columns: 1fr; gap: 0; }
+.p-step {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: 2rem; padding: 2rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: start; transition: background 0.2s;
+}
+.p-step:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.p-step:hover { background: rgba(41,60,85,0.2); padding-left: 1rem; padding-right: 1rem; margin: 0 -1rem; }
+.p-step-num { font-family: var(--font-disp); font-size: 2.2rem; font-weight: 700; color: rgba(193,255,114,0.15); line-height: 1; letter-spacing: -0.04em; }
+.p-step-content {}
+.p-step-time { font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.35rem; }
+.p-step-title { font-family: var(--font-body); font-size: 1.1rem; font-weight: 400; color: var(--white); margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.p-step-body { font-size: 0.84rem; color: var(--slate-lt); line-height: 1.72; max-width: 600px; }
+
+/* ════════════════════════════════════════════
+   PRICING — single clean card
+═══════════════════════════════════════════════ */
+.pricing-section { padding: 8rem 3rem; background: var(--mid); }
+.pricing-inner { max-width: 860px; margin: 0 auto; }
+.pricing-header { text-align: center; margin-bottom: 3.5rem; }
+.pricing-title { font-family: var(--font-body); font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 0.8rem; }
+.pricing-title .hl { color: var(--lime); }
+.pricing-sub { font-size: 0.95rem; color: var(--slate-lt); line-height: 1.78; max-width: 440px; margin: 0 auto; }
+
+.price-card {
+  background: var(--deep);
+  border: 1px solid rgba(193,255,114,0.1);
+  padding: 0; position: relative; overflow: hidden;
+}
+.price-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--lime), rgba(193,255,114,0.2));
+}
+.price-card-top {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: start; padding: 2.5rem 2.5rem 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.card-label { font-family: var(--font-ui); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 0.5rem; }
+.card-name { font-family: var(--font-body); font-size: 1.6rem; font-weight: 400; letter-spacing: -0.02em; color: var(--white); }
+
+.price-display { text-align: right; }
+.price-was { font-family: var(--font-ui); font-size: 0.8rem; color: var(--slate); text-decoration: line-through; margin-bottom: 0.2rem; }
+.price-big { font-family: var(--font-body); font-size: 3.5rem; font-weight: 400; letter-spacing: -0.04em; line-height: 1; color: var(--white); }
+.price-big sup { font-size: 1.3rem; vertical-align: top; margin-top: 0.5rem; color: var(--lime); }
+.price-note { font-family: var(--font-ui); font-size: 0.62rem; color: var(--slate-lt); margin-top: 0.3rem; }
+
+.price-card-body { padding: 2rem 2.5rem; }
+.includes-label { font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 1.2rem; }
+.includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 2rem; }
+.inc-item { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.84rem; color: rgba(255,255,255,0.78); line-height: 1.5; }
+.chk-sm { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; }
+
+.price-card-footer {
+  padding: 1.5rem 2.5rem 2.5rem;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 1.5rem; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.pf-note { font-size: 0.8rem; color: var(--slate-lt); line-height: 1.7; }
+.pf-note strong { color: var(--white); font-weight: 500; }
+.pf-cta {
+  background: var(--lime); color: var(--deep);
+  font-family: var(--font-ui); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 1rem 2rem; text-decoration: none; white-space: nowrap; transition: background 0.2s;
+  display: inline-block;
+}
+.pf-cta:hover { background: var(--white); }
+
+/* add-ons */
+.addons { margin-top: 2rem; }
+.addons-label { font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 1rem; text-align: center; }
+.addons-row { display: flex; gap: 1px; background: rgba(255,255,255,0.06); }
+.addon {
+  flex: 1; background: var(--deep); padding: 1.2rem 1.4rem; text-align: center;
+  border-top: 1px solid transparent; transition: border-color 0.2s;
+}
+.addon:hover { border-top-color: rgba(193,255,114,0.3); }
+.addon-name { font-family: var(--font-body); font-size: 0.85rem; color: var(--white); margin-bottom: 0.25rem; }
+.addon-price { font-family: var(--font-ui); font-size: 0.7rem; color: var(--lime); letter-spacing: 0.08em; }
+.addon-desc { font-size: 0.72rem; color: var(--slate); margin-top: 0.3rem; line-height: 1.5; }
+
+/* ════════════════════════════════════════════
+   FAQ
+═══════════════════════════════════════════════ */
+.faq-section { padding: 7rem 3rem; background: var(--deep); }
+.faq-inner { max-width: 680px; margin: 0 auto; }
+.faq-title { font-family: var(--font-body); font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 400; letter-spacing: -0.025em; margin-bottom: 3rem; text-align: center; }
+.faq-title .hl { color: var(--lime); }
+.faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.faq-q { font-family: var(--font-body); font-size: 0.97rem; font-weight: 400; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.4rem 0; letter-spacing: -0.01em; }
+.faq-ico { width: 22px; height: 22px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--lime); font-size: 0.95rem; font-family: sans-serif; transition: transform 0.3s, background 0.2s; }
+.faq-item.open .faq-ico { transform: rotate(45deg); background: rgba(193,255,114,0.08); }
+.faq-a { font-size: 0.86rem; color: var(--slate-lt); line-height: 1.82; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.4rem; }
+
+/* ════════════════════════════════════════════
+   CTA FORM
+═══════════════════════════════════════════════ */
+.cta-section { padding: 8rem 3rem; background: var(--deep-alt); position: relative; overflow: hidden; }
+.cta-section::before {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 70vw; height: 70vw; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(193,255,114,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; position: relative; z-index: 1; }
+.cta-left {}
+.cta-title { font-family: var(--font-body); font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 1.2rem; }
+.cta-title .hl { color: var(--lime); }
+.cta-body { font-size: 0.95rem; line-height: 1.82; color: var(--slate-lt); margin-bottom: 2rem; }
+.cta-body strong { color: var(--white); font-weight: 500; }
+
+.cta-stat-row { display: flex; gap: 2rem; margin-top: 2rem; }
+.cta-stat {}
+.cs-num { font-family: var(--font-body); font-size: 2rem; font-weight: 400; color: var(--lime); letter-spacing: -0.03em; line-height: 1; }
+.cs-label { font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--slate); margin-top: 0.3rem; }
+
+.form-wrap { background: var(--mid); border: 1px solid rgba(41,60,85,0.8); padding: 2.25rem; position: relative; }
+.form-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--lime), rgba(193,255,114,0.2)); }
+.f-title { font-family: var(--font-body); font-size: 1rem; font-weight: 400; color: var(--white); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.9rem; }
+.f-group { display: flex; flex-direction: column; gap: 0.38rem; margin-bottom: 0.85rem; }
+.f-group label { font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); }
+.f-group input, .f-group select, .f-group textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--white); font-family: var(--font-body); font-size: 0.86rem; padding: 0.75rem 0.9rem; outline: none; transition: border-color 0.25s; -webkit-appearance: none; resize: none; }
+.f-group input::placeholder, .f-group textarea::placeholder { color: rgba(255,255,255,0.18); }
+.f-group input:focus, .f-group select:focus, .f-group textarea:focus { border-color: var(--lime); }
+.f-group select option { background: var(--deep); }
+.f-submit { width: 100%; background: var(--lime); color: var(--deep); border: none; font-family: var(--font-ui); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 1.05rem; cursor: pointer; transition: background 0.2s; margin-top: 0.4rem; }
+.f-submit:hover { background: var(--white); }
+.f-note { font-size: 0.7rem; color: var(--slate); text-align: center; margin-top: 0.85rem; line-height: 1.6; }
+
+/* ── FOOTER ── */
+footer { background: var(--deep); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.8rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+footer p { font-size: 0.73rem; color: var(--slate); }
+footer a { color: var(--slate-lt); text-decoration: none; }
+footer a:hover { color: var(--lime); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.65s ease, transform 0.65s ease; }
+.js-loaded .reveal { opacity: 0; transform: translateY(22px); }
+.js-loaded .reveal.visible { opacity: 1; transform: translateY(0); }
+.rd1 { transition-delay: 0.1s; } .rd2 { transition-delay: 0.2s; } .rd3 { transition-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.25rem; }
+  .hero { padding: 0 1.25rem 4rem; }
+  .hero-deco { display: none; }
+  .hero-sub-row { flex-direction: column; align-items: flex-start; }
+  .hero-price-snap { text-align: left; }
+  .problem-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .solution-cols { grid-template-columns: 1fr; gap: 2.5rem; }
+  .filmstrip { height: 200px; }
+  .delivers-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .delivers-grid { grid-template-columns: 1fr 1fr; }
+  .includes-grid { grid-template-columns: 1fr; }
+  .price-card-top { grid-template-columns: 1fr; }
+  .price-display { text-align: left; }
+  .price-card-footer { grid-template-columns: 1fr; }
+  .addons-row { flex-direction: column; }
+  .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .f-row { grid-template-columns: 1fr; }
+  .problem-section, .solution-section, .delivers-section, .who-section,
+  .process-section, .pricing-section, .faq-section, .cta-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+  footer { flex-direction: column; text-align: center; padding: 1.8rem 1.25rem; }
+}
+@media (max-width: 560px) {
+  .delivers-grid { grid-template-columns: 1fr; }
+  .who-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <span class="logo-h">h</span><span class="logo-illtop">illtop</span>
+    <span class="logo-ch">creative hub</span>
+  </a>
+  <a href="#book" class="nav-cta">Book Your Day</a>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-deco">3</div>
+
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    3-Month Introductory Package &nbsp;·&nbsp; Only 5 Spots Available
+  </div>
+
+  <h1>One session of filming.<br><em>Weeks of</em> <span class="hl">content.</span></h1>
+
+  <div class="hero-sub-row">
+    <p class="hero-sub">
+      You have the expertise. You have the story. You just need it captured the right way.
+      We come to you, shoot interview-style video content in a focused half-day session,
+      deliver <strong>enough professionally edited short-form content to keep you posting consistently</strong> for 3 full months — and post it for you. Prove the results. Build a presence that actually grows.
+    </p>
+    <div class="hero-price-snap">
+      <div class="snap-label">Introductory Rate</div>
+      <div class="snap-num"><sup>$</sup>2,000<span style="font-size:1.1rem;color:var(--slate-lt);font-weight:300;">/mo</span></div>
+      <div class="snap-period">3-Month Commitment · $6,000 Total</div>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#book" class="btn-primary">Book Your Content Day →</a>
+    <a href="#what-you-get" class="btn-ghost">See what's included ↓</a>
+  </div>
+</section>
+
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <!-- duplicated for infinite loop -->
+    <span class="ticker-item">3 Months of Content <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Half-Day Shoot <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Social Posting Included <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">3-Month Commitment <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Doctors &amp; Experts <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Business Owners <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Coaches &amp; Consultants <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Built to Grow <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">3 Months of Content <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Half-Day Shoot <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Social Posting Included <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">3-Month Commitment <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Doctors &amp; Experts <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Business Owners <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Coaches &amp; Consultants <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Built to Grow <span class="ticker-sep">·</span></span>
+  </div>
+</div>
+
+
+<!-- THE PROBLEM -->
+<section class="problem-section">
+  <div class="problem-inner">
+    <div class="eyebrow reveal">The Real Problem</div>
+    <div class="problem-grid">
+      <div>
+        <h2 class="problem-headline reveal">
+          You know your stuff.<br><em>Nobody's watching</em><br><span class="hl">yet.</span>
+        </h2>
+      </div>
+      <div class="problem-right reveal rd1">
+        <ul class="problem-list">
+          <li><span class="prob-x">✕</span>Your expertise is real but your content looks DIY — and people judge fast</li>
+          <li><span class="prob-x">✕</span>You know what you want to say but don't know how to make it scroll-stopping</li>
+          <li><span class="prob-x">✕</span>You don't have time to film, edit, caption, and post — that's a full-time job</li>
+          <li><span class="prob-x">✕</span>One video a week isn't enough. Algorithms reward consistency and volume</li>
+          <li><span class="prob-x">✕</span>The people who need you most aren't finding you because you're invisible online</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- THE SOLUTION -->
+<section class="solution-section">
+  <div class="solution-inner">
+    <div class="eyebrow-dark reveal">The Solution</div>
+    <h2 class="solution-title reveal">
+      Your knowledge.<br>Our camera.<br><span class="hl-dark">3 months of content. Half a day.</span>
+    </h2>
+
+    <div class="solution-cols">
+      <div class="solution-body reveal">
+        <p>Think of it like a podcast — but built for short-form. We sit across from you, ask the right questions, and let your expertise do the talking. Our team handles everything else: the lighting, the framing, the prompts, the editing, and the posting.</p>
+        <p>You show up for a focused half-day session. We take it from there — editing, captioning, scheduling, and publishing your content every month for 3 months. You stay focused on your business while your audience grows.</p>
+        <p><strong>The result:</strong> A steady stream of professionally edited short-form content delivered and posted on your behalf each month — hook-first, captioned, formatted for Instagram, TikTok, and YouTube Shorts. Enough to keep your feed active and your audience growing for the full 3 months.</p>
+        <p>Three months is enough time to build real momentum, prove real results, and give you a clear picture of what consistent content does for your brand.</p>
+      </div>
+      <div class="reveal rd2">
+        <div class="filmstrip">
+          <div class="film-bg">
+            <div class="film-row">
+              <!-- 9 frames x 2 = 18 total for infinite loop -->
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="14" r="11" stroke-dasharray="2 3"/></svg><div class="film-label">Reel 01</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="8" width="20" height="14" rx="1"/><polyline points="11,8 11,5 17,5 17,8"/></svg><div class="film-label">Reel 02</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 4 L14 24 M4 14 L24 14" stroke-dasharray="3 2"/></svg><div class="film-label">Reel 03</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="8,6 22,14 8,22"/></svg><div class="film-label">Reel 04</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="14" r="11" stroke-dasharray="2 3"/></svg><div class="film-label">Reel 05</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="8" width="20" height="14" rx="1"/></svg><div class="film-label">Reel 06</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="8,6 22,14 8,22"/></svg><div class="film-label">Reel 07</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="14" cy="14" r="8"/><line x1="14" y1="6" x2="14" y2="14" stroke-width="1.5"/></svg><div class="film-label">Reel 08</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 20 Q14 8 22 20"/></svg><div class="film-label">Reel 09</div></div>
+              <!-- duplicate -->
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="14" cy="14" r="5"/><circle cx="14" cy="14" r="11" stroke-dasharray="2 3"/></svg><div class="film-label">Reel 10</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="8" width="20" height="14" rx="1"/><polyline points="11,8 11,5 17,5 17,8"/></svg><div class="film-label">Reel 11</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="8,6 22,14 8,22"/></svg><div class="film-label">Reel 12</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="14" cy="14" r="5"/></svg><div class="film-label">Reel 13</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="8" width="20" height="14" rx="1"/></svg><div class="film-label">Reel 14</div></div>
+              <div class="film-frame"><svg class="frame-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="8,6 22,14 8,22"/></svg><div class="film-label">Reel 15</div></div>
+            </div>
+          </div>
+          <div class="film-overlay"></div>
+          <div class="film-counter">Content · Posted Monthly</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHAT YOU GET -->
+<section class="delivers-section" id="what-you-get">
+  <div class="delivers-inner">
+    <div class="delivers-header reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:1rem;">What's Delivered</div>
+        <h2 class="delivers-title">Everything included.<br><span class="hl">Nothing left to figure out.</span></h2>
+      </div>
+      <p class="delivers-desc">We handle every step — production, editing, captioning, and posting — for 3 full months. <strong>You show up for the shoot. We handle everything else.</strong> No back-and-forth on editing software, no scheduling posts, no wondering if your captions are right.</p>
+    </div>
+
+    <div class="delivers-grid reveal">
+      <div class="d-card">
+        <div class="d-num">01</div>
+        <div class="d-title">Pre-Shoot Strategy Session</div>
+        <div class="d-body">Before we arrive, we do a deep-dive on your brand, your audience, and your goals. We come prepared with topic prompts, question frameworks, and a plan for the day — so your time is never wasted.</div>
+        <div class="d-pill">Before the Day</div>
+      </div>
+      <div class="d-card">
+        <div class="d-num">02</div>
+        <div class="d-title">Half-Day On-Location Shoot</div>
+        <div class="d-body">Our crew comes to you — your office, your studio, your space. Lighting, camera, audio — all handled. We run the interview, ask the follow-up questions, and draw the content out of you in a way that feels natural on camera. A focused half-day is all it takes.</div>
+        <div class="d-pill">The Shoot Session</div>
+      </div>
+      <div class="d-card">
+        <div class="d-num">03</div>
+        <div class="d-title">Short-Form Content, Delivered Monthly</div>
+        <div class="d-body">Hook-first cuts, captions, music, brand overlays. Edited specifically for Instagram Reels, TikTok, and YouTube Shorts. Each reel is a standalone piece of content built to perform — delivered every month for 3 months from your single shoot session.</div>
+        <div class="d-pill">Batched &amp; Delivered Monthly</div>
+      </div>
+      <div class="d-card">
+        <div class="d-num">04</div>
+        <div class="d-title">Caption &amp; Hashtag Copy</div>
+        <div class="d-body">Every reel comes with a written caption optimized for engagement and discoverability — including strategic hashtag sets for your niche. Ready to go with each monthly delivery, nothing to write yourself.</div>
+        <div class="d-pill">Every Post · Every Month</div>
+      </div>
+      <div class="d-card">
+        <div class="d-num">05</div>
+        <div class="d-title">Done-For-You Social Posting</div>
+        <div class="d-body">We don't just deliver files — we publish them. Your reels are scheduled and posted to your Instagram, TikTok, and/or YouTube Shorts on an optimized cadence each month. You approve the content, we handle the rest. No login required on your end beyond initial access.</div>
+        <div class="d-pill">IG · TikTok · YouTube Shorts</div>
+      </div>
+      <div class="d-card">
+        <div class="d-num">06</div>
+        <div class="d-title">Monthly Performance Check-In</div>
+        <div class="d-body">Each month we review what's working — reach, engagement, follower growth, top-performing reels. We use that data to sharpen the next month's content strategy. By month three, you'll have real numbers, real proof, and a clear picture of what continued investment looks like.</div>
+        <div class="d-pill">Results You Can See</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHO IT'S FOR -->
+<section class="who-section">
+  <div class="who-inner">
+    <div class="eyebrow reveal">Who This Is For</div>
+    <h2 class="who-title reveal">You have something worth <span class="hl">saying.</span></h2>
+    <p class="who-sub reveal">The Content Day was built for experts, practitioners, and business owners who have real value to share — and need a professional team to help the right people hear it.</p>
+
+    <div class="who-grid reveal">
+      <div class="who-card">
+        <div class="who-tag">Healthcare &amp; Wellness</div>
+        <div class="who-name">Doctors &amp; Practitioners</div>
+        <div class="who-desc">You have clinical expertise your patients and prospects are already searching for. We make it watchable, shareable, and credibility-building.</div>
+        <div class="who-example">Obesity medicine, dermatology, functional medicine, physical therapy...</div>
+      </div>
+      <div class="who-card">
+        <div class="who-tag">Business &amp; Finance</div>
+        <div class="who-name">Coaches &amp; Consultants</div>
+        <div class="who-desc">Your frameworks and insights can attract clients at scale. Interview-style content positions you as the authority — not just another person selling services.</div>
+        <div class="who-example">Business coaches, financial advisors, HR consultants, marketing experts...</div>
+      </div>
+      <div class="who-card">
+        <div class="who-tag">Local Business</div>
+        <div class="who-name">Established Business Owners</div>
+        <div class="who-desc">You've built something real. Now show it. Content that puts a face to your brand builds the trust that converts browsers into loyal customers.</div>
+        <div class="who-example">Med spas, law firms, real estate agents, contractors, restaurants...</div>
+      </div>
+      <div class="who-card">
+        <div class="who-tag">Creators &amp; Influencers</div>
+        <div class="who-name">Emerging Voices</div>
+        <div class="who-desc">Ready to level up from DIY content to something that actually looks the part? This is how creators break through to the next tier of following.</div>
+        <div class="who-example">Fitness creators, lifestyle influencers, educators, niche experts...</div>
+      </div>
+      <div class="who-card">
+        <div class="who-tag">Education &amp; Advocacy</div>
+        <div class="who-name">Nonprofits &amp; Educators</div>
+        <div class="who-desc">Stories and mission-driven content drive more donations and engagement than anything else. We help organizations find their voice on video.</div>
+        <div class="who-example">Nonprofits, school programs, community leaders, advocacy groups...</div>
+      </div>
+      <div class="who-card">
+        <div class="who-tag">Personal Brand</div>
+        <div class="who-name">Anyone Ready to Grow</div>
+        <div class="who-desc">If you've been putting off video because it feels complicated or expensive — this is your entry point. We removed every barrier to doing it right.</div>
+        <div class="who-example">Authors, speakers, ministry leaders, thought leaders, executives...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- HOW THE DAY WORKS -->
+<section class="process-section">
+  <div class="process-inner">
+    <div class="eyebrow reveal">How It Works</div>
+    <h2 class="process-title reveal">Your Content Day, <span class="hl">start to finish.</span></h2>
+    <div class="process-steps reveal">
+      <div class="p-step">
+        <div class="p-step-num">01</div>
+        <div class="p-step-content">
+          <div class="p-step-time">Week Before</div>
+          <div class="p-step-title">Strategy &amp; Prep Call</div>
+          <p class="p-step-body">We meet with you virtually to understand your brand, audience, and goals. We build a topic list, question framework, and shot plan. You show up on shoot day knowing exactly what to expect — no surprises.</p>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-step-num">02</div>
+        <div class="p-step-content">
+          <div class="p-step-time">Shoot Day · Opening</div>
+          <div class="p-step-title">Setup &amp; Warmup</div>
+          <p class="p-step-body">Our crew arrives 30 minutes early to set up lighting, camera, and audio at your location. Before we roll, we do a short camera warmup so you feel natural and comfortable — not stiff and rehearsed. The half-day format keeps energy high and focused the whole time.</p>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-step-num">03</div>
+        <div class="p-step-content">
+          <div class="p-step-time">Shoot Session · Main Block</div>
+          <div class="p-step-title">The Interview Sessions</div>
+          <p class="p-step-body">Think of this like the best podcast you've ever been on — except it's designed entirely around your content. We guide the conversation, ask the questions, and draw out the moments that make for great short-form clips. You just talk. We capture everything.</p>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-step-num">04</div>
+        <div class="p-step-content">
+          <div class="p-step-time">Ongoing · Months 1–3</div>
+          <div class="p-step-title">Monthly Delivery &amp; Posting</div>
+          <p class="p-step-body">Your content is batched and released monthly — edited, captioned, and posted for you on an optimized schedule. Each month we review performance, share what's working, and use the data to refine how we deploy the remaining pieces. Three months of consistent, professional presence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="pricing-inner">
+    <div class="pricing-header reveal">
+      <div class="eyebrow" style="justify-content:center; margin-bottom:1rem;">The Investment</div>
+      <h2 class="pricing-title">Simple pricing. <span class="hl">Real commitment.</span></h2>
+      <p class="pricing-sub">Three months is enough time to build something real. This introductory package is priced to give you a meaningful entry point — and give us a chance to prove what we can do for your brand.</p>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="price-card-top">
+        <div>
+          <div class="card-label">3-Month Introductory Package</div>
+          <div class="card-name">The Content Growth Starter</div>
+        </div>
+        <div class="price-display">
+          <div class="price-was">Shoot + editing alone: $5,000+</div>
+          <div class="price-big"><sup>$</sup>2,000<span style="font-size:1rem;color:var(--slate-lt);font-family:var(--font-body);font-weight:300;">/mo</span></div>
+          <div class="price-note">3-Month Commitment · $6,000 Total · Social Posting Included</div>
+        </div>
+      </div>
+
+      <div class="price-card-body">
+        <div class="includes-label">Everything included in this price</div>
+        <div class="includes-grid">
+          <div class="inc-item"><svg class="chk-sm" viewBox="0 0 14 14" fill="none" stroke="#c1ff72" stroke-width="2"><polyline points="2,7 5,10.5 12,3"/></svg>Pre-shoot strategy &amp; prep call</div>
+          <div class="inc-item"><svg class="chk-sm" viewBox="0 0 14 14" fill="none" stroke="#c1ff72" stroke-width="2"><polyline points="2,7 5,10.5 12,3"/></svg>Half-day on-location shoot (3–4 hrs)</div>
+          <div class="inc-item"><svg class="chk-sm" viewBox="0 0 14 14" fill="none" stroke="#c1ff72" stroke-width="2"><polyline points="2,7 5,10.5 12,3"/></svg>Professional lighting, camera &amp; audio</div>
+          <div class="inc-item"><svg class="chk-sm" viewBox="0 0 14 14" fill="none" stroke="#c1ff72" stroke-width="2"><polyline points="2,7 5,10.5 12,3"/></svg>Content filmed, edited &amp; delivered monthly</div>
+          <div class="inc-item"><svg class="chk-sm" viewBox="0 0 14 14" fill="none" stroke="#c1ff72" stroke-width="2"><polyline points="2,7 5,10.5 12,3"/></svg>Done-for-you social media posting</div>
+          <div class="inc-item"><svg class="chk-sm" viewBox="0 0 14 14" fill="none" stroke="#c1ff72" stroke-width="2"><polyline points="2,7 5,10.5 12,3"/></svg>Captions &amp; hashtags for every post</div>
+          <div class="inc-item"><svg class="chk-sm" viewBox="0 0 14 14" fill="none" stroke="#c1ff72" stroke-width="2"><polyline points="2,7 5,10.5 12,3"/></svg>Monthly performance check-in &amp; reporting</div>
+          <div class="inc-item"><svg class="chk-sm" viewBox="0 0 14 14" fill="none" stroke="#c1ff72" stroke-width="2"><polyline points="2,7 5,10.5 12,3"/></svg>One round of revisions per batch</div>
+        </div>
+      </div>
+
+      <div class="price-card-footer">
+        <p class="pf-note">3-month commitment billed monthly at <strong>$2,000/mo</strong>. First month due at signing to secure your shoot date. <strong>Social posting and monthly reporting included.</strong> Ad spend is separate and optional.</p>
+        <a href="#book" class="pf-cta">Start Your 3 Months →</a>
+      </div>
+    </div>
+
+    <!-- Continuation offer -->
+    <div class="addons reveal">
+      <div class="addons-label">After Your 3 Months</div>
+      <div class="addons-row">
+        <div class="addon" style="flex:2; border-left: 2px solid rgba(193,255,114,0.3);">
+          <div class="addon-name" style="font-size:1rem;">Continue with the Full Content Program</div>
+          <div class="addon-price" style="font-size:0.82rem; margin: 0.4rem 0;">$3,500 / month</div>
+          <div class="addon-desc" style="font-size:0.78rem; line-height:1.65;">By the end of month three, you'll have real results and a real audience. Clients who continue move to our full ongoing content program at $3,500/month — which includes a fresh content shoot every quarter, monthly reel delivery, done-for-you posting, and continued performance reporting. No pressure, no obligation. The results will speak for themselves.</div>
+        </div>
+        <div class="addon" style="flex:1;">
+          <div class="addon-name">Add Paid Ad Management</div>
+          <div class="addon-price">From $750/mo</div>
+          <div class="addon-desc">Amplify your best-performing reels with targeted paid campaigns to accelerate growth beyond organic reach. Available as an add-on at any point during your 3 months.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <h2 class="faq-title reveal">Questions we <span class="hl">always get.</span></h2>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q">Do I need to prepare scripts or talking points?<div class="faq-ico">+</div></div>
+        <div class="faq-a">No scripts needed — and we actually prefer it that way. Scripted content reads as scripted on camera. We prep everything before the day and interview you conversationally, which is what makes short-form video feel authentic and perform well. You just need to know your subject — and you already do.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where does the shoot happen?<div class="faq-ico">+</div></div>
+        <div class="faq-a">We come to you. Your office, clinic, studio, home — wherever you're most comfortable and wherever makes sense for your brand. We'll advise on the best setup during your prep call. If you don't have a good space, we can discuss studio options as well.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">I'm not comfortable on camera. Is that a problem?<div class="faq-ico">+</div></div>
+        <div class="faq-a">It's actually the most common thing we hear — and it's never been a dealbreaker. Our interview approach is specifically designed to make people who don't like being filmed feel comfortable. The warmup session helps a lot, and when you're talking about something you know deeply, it shows. Most clients tell us they forgot we were filming within the first 20 minutes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How long does the shoot day actually take?<div class="faq-ico">+</div></div>
+        <div class="faq-a">Plan for a half-day — typically 3 to 4 hours including setup and interview sessions. That single session is what we draw all your content from across the full 3 months — batched and posted monthly. A well-prepped half-day generates more usable footage than you'd expect, and the focused format keeps your energy high throughout.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How does the monthly posting work?<div class="faq-ico">+</div></div>
+        <div class="faq-a">After your shoot, we edit and batch your content and release it on a monthly schedule — posting directly to your Instagram, TikTok, and/or YouTube Shorts on your behalf. You approve the content before anything goes live. The cadence (daily, a few times a week, etc.) is built around your audience and goals. You keep full access to your accounts at all times.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will this actually grow my following?<div class="faq-ico">+</div></div>
+        <div class="faq-a">Short-form video is the highest-ROI content format on social right now — especially for experts and business owners. Three months of consistent, professional content gives the algorithm something to work with and gives your audience a reason to follow. We can't guarantee specific follower numbers, but we can guarantee that by month three you'll have real data, real engagement, and a clear picture of what continued investment will do. That's exactly why we structured this as a 3-month starter — it's enough time to actually see what's possible.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens after the 3 months?<div class="faq-ico">+</div></div>
+        <div class="faq-a">No pressure and no automatic renewal. At the end of month three, we'll walk you through your results — growth, engagement, top-performing content — and talk through what continued partnership looks like. Clients who continue move to our full ongoing content program at $3,500/month, which includes a fresh shoot every quarter, fresh content delivered and posted monthly, and ongoing performance reporting. Most clients find the results make that decision easy — but you're never obligated to continue.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA / FORM -->
+<section class="cta-section" id="book">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <div class="eyebrow" style="margin-bottom:1.2rem;">Book Your Date</div>
+      <h2 class="cta-title">Three months to prove<br>what content can do for <span class="hl">your brand.</span></h2>
+      <p class="cta-body">
+        You've been meaning to do this. You know video works. You've just never had a team to make it easy, consistent, and worth the investment.<br><br>
+        This is the version where we do the work and show you the results — then you decide what comes next.<br><br>
+        <strong>Half a day of filming. A full quarter of content. Done-for-you posting. $2,000/month for 3 months.</strong> Fill out the form and we'll reach out within 24 hours.
+      </p>
+      <div class="cta-stat-row">
+        <div class="cta-stat"><div class="cs-num">3</div><div class="cs-label">Months of Content</div></div>
+        <div class="cta-stat"><div class="cs-num">3</div><div class="cs-label">Month Commitment</div></div>
+        <div class="cta-stat"><div class="cs-num">24h</div><div class="cs-label">Response Time</div></div>
+      </div>
+    </div>
+
+    <div class="form-wrap">
+      <div class="f-title">Tell us about yourself</div>
+      <div class="f-row">
+        <div class="f-group"><label>First Name</label><input id="f-fname" type="text" placeholder="Jane"></div>
+        <div class="f-group"><label>Last Name</label><input id="f-lname" type="text" placeholder="Smith"></div>
+      </div>
+      <div class="f-group"><label>Business / Brand Name</label><input id="f-biz" type="text" placeholder="Your Brand"></div>
+      <div class="f-group">
+        <label>What best describes you?</label>
+        <select id="f-cat">
+          <option value="" disabled selected>Select your category</option>
+          <option>Doctor / Healthcare Professional</option>
+          <option>Business Coach / Consultant</option>
+          <option>Local Business Owner</option>
+          <option>Creator / Influencer</option>
+          <option>Attorney / Professional Services</option>
+          <option>Fitness / Wellness Expert</option>
+          <option>Real Estate Professional</option>
+          <option>Nonprofit / Educator</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="f-group"><label>Email Address</label><input id="f-email" type="email" placeholder="jane@yourbrand.com"></div>
+      <div class="f-group"><label>Phone Number</label><input id="f-phone" type="tel" placeholder="(555) 000-0000"></div>
+      <div class="f-group"><label>Tell us a little about your goals</label><textarea id="f-goals" rows="3" placeholder="What do you want to grow? Who's your audience?"></textarea></div>
+      <button class="f-submit" id="f-submit-btn">Book My Content Day →</button>
+      <p class="f-note" id="f-status">3-month commitment · $2,000/month · First month due at signing. We'll reach out within 24 hours to confirm fit and schedule your shoot date.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">
+    <span class="logo-h">h</span><span class="logo-illtop">illtop</span>
+    <span class="logo-ch">creative hub</span>
+  </a>
+  <p>© 2025 Hilltop Creative Hub · All rights reserved</p>
+  <p><a href="/cdn-cgi/l/email-protection#8fe7eae3e3e0cfe7e6e3e3fbe0ffecfdeaeefbe6f9eae7faeda1ece0e2"><span class="__cf_email__" data-cfemail="452d2029292a052d2c2929312a3526372024312c33202d30276b262a28">[email&#160;protected]</span></a></p>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Scroll reveal — add js-loaded so elements start hidden, then reveal
+  document.body.classList.add('js-loaded');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Form submission — sends to casey@hilltopcreativehub.com via mailto
+  document.getElementById('f-submit-btn').addEventListener('click', function() {
+    const fname  = document.getElementById('f-fname').value.trim();
+    const lname  = document.getElementById('f-lname').value.trim();
+    const biz    = document.getElementById('f-biz').value.trim();
+    const cat    = document.getElementById('f-cat').value;
+    const email  = document.getElementById('f-email').value.trim();
+    const phone  = document.getElementById('f-phone').value.trim();
+    const goals  = document.getElementById('f-goals').value.trim();
+    const status = document.getElementById('f-status');
+
+    if (!fname || !email) {
+      status.textContent = 'Please enter at least your name and email before submitting.';
+      status.style.color = '#67e8f9';
+      return;
+    }
+
+    const subject = encodeURIComponent('Content Day Inquiry — ' + fname + ' ' + lname + (biz ? ' / ' + biz : ''));
+    const body = encodeURIComponent(
+      'New Content Day inquiry from the landing page:\n\n' +
+      'Name: ' + fname + ' ' + lname + '\n' +
+      'Business: ' + (biz || '—') + '\n' +
+      'Category: ' + (cat || '—') + '\n' +
+      'Email: ' + (email || '—') + '\n' +
+      'Phone: ' + (phone || '—') + '\n\n' +
+      'Goals / Notes:\n' + (goals || '—')
+    );
+
+    window.location.href = 'mailto:casey@hilltopcreativehub.com?subject=' + subject + '&body=' + body;
+
+    status.textContent = "Opening your email client now — just hit send and we'll be in touch within 24 hours!";
+    status.style.color = '#c1ff72';
+  });
+</script>
+</body>
+</html>
